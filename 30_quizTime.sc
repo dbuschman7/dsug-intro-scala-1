@@ -3,6 +3,8 @@ import scala.io.Codec.string2codec
 import scala.io.Source
 import scala.reflect.io.File
 
+// Downloaded file from http://www.gutenberg.org/ebooks/100.txt.utf-8
+
 object quizTime {
   println("Welcome to the Scala worksheet")
   val Fmt = java.text.NumberFormat.getIntegerInstance
