@@ -20,10 +20,12 @@ class MyClass extends IJavaInterface with ScalaTrait {
 
 // object are static singletons
 object classes {
-  val obj = new MyClass                           //> obj  : MyClass = MyClass@ba8a1dc
+  val obj = new MyClass                           //> obj  : MyClass = MyClass@504bae78
 
-//  val results = Seq(obj.getX, obj.getY, obj.getYPlusX)
-//  println(s"Total = ${results.sum} for ${results}")
+  val results = Seq(obj.getX, obj.getY, obj.getYPlusX)
+                                                  //> results  : Seq[Int] = List(1, 2, 3)
+  println(s"Total = ${results.sum} for ${results}")
+                                                  //> Total = 6 for List(1, 2, 3)
 }
 
 //

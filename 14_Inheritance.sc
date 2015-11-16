@@ -8,17 +8,19 @@ object caseClasses17 {
   case class Plus(l: Expr, r: Expr) extends Expr
   case class Minus(i: Expr, r: Expr) extends Expr
 
-  def eval(e: Expr): Int = e match {
+  def eval(e: Expr):Int = e match {
     case Number(v)   => v
     case Plus(l, r)  => eval(l) + eval(r)
     case Minus(l, r) => eval(l) - eval(r)
   }                                               //> eval: (e: caseClasses17.Expr)Int
 
   // 1 + (2 + 3)
-  //eval(Plus(Number(1), Plus(Number(2), Number(3))))
+  eval(Plus(Number(1), Plus(Number(2), Number(3))))
+                                                  //> res0: Int = 6
 
   // 1 + (2 - 3)
-  //eval(Plus(Number(1), Minus(Number(2), Number(3))))
+  eval(Plus(Number(1), Minus(Number(2), Number(3))))
+                                                  //> res1: Int = 0
 
 }
 

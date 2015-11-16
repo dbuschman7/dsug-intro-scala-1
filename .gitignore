@@ -7,3 +7,6 @@ project/target
 .settings/
 
 .worksheet/
+/bin/
+
+.cache-main
