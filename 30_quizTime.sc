@@ -18,7 +18,7 @@ object quizTime {
   val lines = Source.fromFile(SrcDestination)("UTF-8").getLines
                                                   //> lines  : Iterator[String] = non-empty iterator
   lines.map { l => Word.findAllIn(l.toLowerCase()).toSeq }
-    .toStream.flatMap(identity)
+    .toSeq.flatMap(identity)
     .groupBy(identity)
     .values.map { f => (f.head, f.count(_ => true)) }
     .filter(_._2 != 1)

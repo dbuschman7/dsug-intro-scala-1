@@ -14,6 +14,7 @@ object functional1 {
   def square(x: Int): Int = x * x                 //> square: (x: Int)Int
   def cube(x: Int): Int = x * x * x               //> cube: (x: Int)Int
 
+  // function as a parameter
   def sum(f: Int => Int, a: Int, b: Int): Int = {
     f(a) + ((a == b) match {
       case true  => 0

@@ -5,7 +5,7 @@ object functional2 {
   def square(x: Int): Int = x * x                 //> square: (x: Int)Int
   def cube(x: Int): Int = x * x * x               //> cube: (x: Int)Int
 
-  // composition
+  // function composition
   def compose(f: Int => Int, g: Int => Int): Int => Int = x => f(g(x))
                                                   //> compose: (f: Int => Int, g: Int => Int)Int => Int
 

@@ -20,5 +20,6 @@ object referential_transparency {
 
   val f1 = Balance("DaVe.", 1000).withdraw(100)   //> f1  : referential_transparency.Balance = Balance(DaVe.,900)
   val f2 = f1.withdraw(100)                       //> f2  : referential_transparency.Balance = Balance(DaVe.,800)
-  
+  val f3 = f1.withdraw(100)                       //> f3  : referential_transparency.Balance = Balance(DaVe.,800)
+
 }

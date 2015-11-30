@@ -9,24 +9,24 @@ import scala.util.Random
 
 // Domain 
 // ////////////
-case class Serve(game: Int, bounces: Int) // number of bounces
-case class Ball(game: Int, count: Int) { // remaining bounces
-  def decrement = copy(count = count - 1)
+case class Serve(game: Int, hits: Int) // number of hits
+case class Ball(game: Int, remaining: Int) { // remaining hits
+  def decrement = copy(remaining = remaining - 1)
 }
 case class Point(game: Int, player: String)
 
 case class PlayGames(count: Int, maxGameLength: Int)
 case class PlayGame(game: Int, starter: ActorPath, other: ActorPath, length: Int)
-case class WinnerIs(game: Int)
+case class WinnerIs()
 
 // Actors 
 // ////////////////
 class Player(name: String, scorer: ActorRef) extends Actor {
   def receive = {
-    case b: Ball if b.count > 0 => sender ! b.decrement
-    case b: Ball                => scorer ! Point(b.game, name)
-    case Serve(game, balls)     => sender ! Ball(game, balls)
-    case unk                    => println(s"Unknown message type - ${unk.toString}")
+    case b: Ball if b.remaining > 0 => sender ! b.decrement
+    case b: Ball                    => scorer ! Point(b.game, name)
+    case Serve(game, hits)         => sender ! Ball(game, hits)
+    case unk                        => println(s"Unknown message type - ${unk.toString}")
   }
 }
 
