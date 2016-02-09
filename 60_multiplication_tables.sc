@@ -2,7 +2,6 @@ object multiplication_tables {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
 
   // List helper functions
-
   List.range(1, 10)                               //> res0: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
   List.range(1, 10, 2)                            //> res1: List[Int] = List(1, 3, 5, 7, 9)
   List.range(2, 11, 2)                            //> res2: List[Int] = List(2, 4, 6, 8, 10)

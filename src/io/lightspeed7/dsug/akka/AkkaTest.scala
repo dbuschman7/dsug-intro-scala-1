@@ -25,8 +25,8 @@ class Player(name: String, scorer: ActorRef) extends Actor {
   def receive = {
     case b: Ball if b.remaining > 0 => sender ! b.decrement
     case b: Ball                    => scorer ! Point(b.game, name)
-    case Serve(game, hits)         => sender ! Ball(game, hits)
-    case unk                        => println(s"Unknown message type - ${unk.toString}")
+    case Serve(game, hits)          => sender ! Ball(game, hits)
+    case unkown                     => println(s"Unknown message type - ${unkown.toString}")
   }
 }
 
@@ -36,14 +36,25 @@ class Scorer extends Actor {
   var games: Int = 0 // total games played
 
   def receive = {
-    case p: Point     => { scores = scores :+ p; if (scores.size == games) self ! WinnerIs }
-    case g: PlayGames => { println(s"Games registered - ${g.count}"); games = g.count }
-    case WinnerIs =>
+    case g: PlayGames =>
+      println(s"Games registered - ${g.count}");
+      games = g.count
+      context become playing
+  }
+
+  def playing: PartialFunction[Any, Unit] = {
+    case p: Point => {
+      println(s"Point received for game ${p.game}")
+      scores = scores :+ p; if (scores.size == games) self ! WinnerIs
+    }
+    case WinnerIs => {
       scores.sortBy(_.game).map { pt => println(s"Game ${pt.game} winner is ${pt.player}") }
       val points = scores.groupBy(_.player).toSeq.map { case (player, pts) => (player, pts.size) }
       val ordered = points.sortBy { case (player, cnt) => 0 - cnt }
       val score = ordered.map(_._2).mkString(" - ", " games to ", ".")
       println(s"The winner is ${ordered.head._1}${score}")
+      context become receive
+    }
   }
 }
 
@@ -79,7 +90,7 @@ class AkkaTest extends FunSuite {
 
     umpire ! PlayGames(Random.nextInt(100), 30)
 
-    Thread.sleep(5 * 1000)
+    Thread.sleep(1 * 1000)
     Await.result(akka.terminate(), 10 seconds)
   }
 }

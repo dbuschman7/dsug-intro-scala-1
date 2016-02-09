@@ -1,10 +1,14 @@
 object functional4 {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
 
-  // call by name - not evalulated until needed
-    def myIf(cond: Boolean, thenPart: Int, elsePart: Int) =
-  //def myIf(cond: Boolean, thenPart: => Int, elsePart: => Int) =
-    if (cond) thenPart else elsePart              //> myIf: (cond: Boolean, thenPart: Int, elsePart: Int)Int
+  // Java is call by value
+
+  // Scala has 'call by name' = i.e. not evalulated until needed
+
+  def myIf(cond: Boolean, thenPart: Int, elsePart: Int) = {
+    //def myIf(cond: Boolean, thenPart: => Int, elsePart: => Int) = {
+    if (cond) thenPart else elsePart
+  }                                               //> myIf: (cond: Boolean, thenPart: Int, elsePart: Int)Int
 
   myIf(1 < 2, 10, 20)                             //> res0: Int = 10
 
