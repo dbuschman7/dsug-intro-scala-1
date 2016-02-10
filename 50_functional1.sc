@@ -23,7 +23,7 @@ object functional1 {
   }                                               //> sum: (f: Int => Int, a: Int, b: Int)Int
 
   Seq(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).sum          //> res0: Int = 55
-  
+
   Seq(identity _, square _, cube _).map { f => sum(f, 1, 10) }
                                                   //> res1: Seq[Int] = List(55, 385, 3025)
 

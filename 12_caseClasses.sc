@@ -24,7 +24,7 @@ object caseClasses {
   val set2 = set + c4                             //> set2  : scala.collection.immutable.Set[MyData] = Set(MyData(DaVe.,234), MyDa
                                                   //| ta(DaVe.,123))
   implicit val _format = Json.format[MyData]      //> _format  : play.api.libs.json.OFormat[MyData] = play.api.libs.json.OFormat$$
-                                                  //| anon$1@3e57cd70
+                                                  //| anon$1@7113b13f
 
   val json = Json.prettyPrint(Json.toJson(set))   //> json  : String = [ {
                                                   //|   "name" : "DaVe.",

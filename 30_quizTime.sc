@@ -7,6 +7,13 @@ import scala.reflect.io.File
 
 object quizTime {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+
+  //
+  // ////////////////////////////////////////////////////////////////////////////////////
+  // Take all the words from Shakespeare's works and calculate the most frequently used words
+  // ////////////////////////////////////////////////////////////////////////////////////
+  //
+
   val Fmt = java.text.NumberFormat.getIntegerInstance
                                                   //> Fmt  : java.text.NumberFormat = java.text.DecimalFormat@674dc
   val Word = "\\b([A-Za-z\\-])+\\b".r             //> Word  : scala.util.matching.Regex = \b([A-Za-z\-])+\b
@@ -17,13 +24,22 @@ object quizTime {
 
   val lines = Source.fromFile(SrcDestination)("UTF-8").getLines
                                                   //> lines  : Iterator[String] = non-empty iterator
-  lines.map { l => Word.findAllIn(l.toLowerCase()).toSeq }
-    .toSeq.flatMap(identity)
-    .groupBy(identity)
-    .values.map { f => (f.head, f.count(_ => true)) }
-    .filter(_._2 != 1)
-    .toSeq.sortBy(-_._2)
-    .take(100)
+
+  def parse(input: Iterator[String], takeCount: Int, filter: ((String, Int)) => Boolean) = {
+    input.flatMap { l => Word.findAllIn(l.toLowerCase()).toSeq }
+      .toSeq
+      .groupBy(identity)
+      .values
+      .map(f => (f.head, f.size))
+      .filter(filter)
+      .toSeq.sortBy(-_._2)
+      .take(takeCount)
+  }                                               //> parse: (input: Iterator[String], takeCount: Int, filter: ((String, Int)) =>
+                                                  //|  Boolean)Seq[(String, Int)]
+
+  val func = { t:(_,Int) => t._2 > 2 }            //> func  : (Tuple2[_, Int]) => Boolean = <function1>
+
+  parse(lines, 100, func )
     .foreach {
       case (word, count) => println(f"${word}%15s : ${Fmt.format(count)}%7s")
     }                                             //>             the :  27,826
@@ -58,7 +74,6 @@ object quizTime {
                                                   //|            will :   5,011
                                                   //|            what :   4,805
                                                   //|              by :   4,451
-                                                  //|             thy :   4,032
-                                                  //|       
+                                                  //|    
                                                   //| Output exceeds cutoff limit.
 }

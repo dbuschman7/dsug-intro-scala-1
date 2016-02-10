@@ -50,7 +50,6 @@ object multiplication_tables {
 
   implicit class RowPimp(row: List[Int]) {
     def davesFunction(width: Int) = row.map(elem => elem.padded(width)).mkString(", ")
-
   }
 
 }

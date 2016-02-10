@@ -13,6 +13,6 @@ object functional2 {
 
   Seq(1, 2, 3, 4).map(compose(square, minus))     //> res0: Seq[Int] = List(0, 1, 4, 9)
   Seq(1, 2, 3, 4).map(minus).map(square)          //> res1: Seq[Int] = List(0, 1, 4, 9)
-  Seq(1, 2, 3, 4).map(square).map(cube)           //> res2: Seq[Int] = List(1, 64, 729, 4096)
+  Seq(1, 2, 3, 4).map(square).map(minus)          //> res2: Seq[Int] = List(0, 3, 8, 15)
 
 }

@@ -34,7 +34,7 @@ class Scorer extends Actor {
 
   var scores: List[Point] = List()
   var games: Int = 0 // total games played
-
+  
   def receive = {
     case g: PlayGames =>
       println(s"Games registered - ${g.count}");

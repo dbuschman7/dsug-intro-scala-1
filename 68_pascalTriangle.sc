@@ -2,12 +2,14 @@ class Pascal {
   lazy val pascalStream: Stream[Seq[Long]] = Seq(1L) #:: pascalStream.scanLeft(Seq(1L, 1L)) { (prev, _) =>
     (Seq(0L) ++ prev :+ 0L) sliding 2 map (_.sum) toList
   }
+  
 }
 
 object pascalTriangle {
   println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
 
-  val p = new Pascal()                            //> p  : Pascal = Pascal@511baa65
+
+  val p = new Pascal()                            //> p  : Pascal = Pascal@35f983a6
   val f = p.pascalStream                          //> f  : Stream[Seq[Long]] = Stream(List(1), ?)
   val t = f.take(10).toList                       //> t  : List[Seq[Long]] = List(List(1), List(1, 1), List(1, 2, 1), List(1, 3, 3
                                                   //| , 1), List(1, 4, 6, 4, 1), List(1, 5, 10, 10, 5, 1), List(1, 6, 15, 20, 15, 
