@@ -2,6 +2,6 @@ scalaVersion := "2.11.7"
 
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.4.0"
 
-libraryDependencies +=  "org.scalatest" % "scalatest_2.11" % "2.2.4" 
+libraryDependencies +=  "org.scalatest" % "scalatest_2.11" % "2.2.4"
 
-libraryDependencies +=  "com.typesafe.play" %% "play-json" % "2.4.6"
+libraryDependencies +=  "com.typesafe.play" % "play-json_2.11" % "2.4.6"

@@ -15,18 +15,19 @@ object quizTime {
   //
 
   val Fmt = java.text.NumberFormat.getIntegerInstance
-                                                  //> Fmt  : java.text.NumberFormat = java.text.DecimalFormat@674dc
-  val Word = "\\b([A-Za-z\\-])+\\b".r             //> Word  : scala.util.matching.Regex = \b([A-Za-z\-])+\b
+
+  val Word = "\\b([A-Za-z\\-])+\\b".r
 
   //  val SrcDestination: String = "/Users/david/shakespeare_test.txt"
-  val SrcDestination: String = "/Users/david/shakespeare.txt"
-                                                  //> SrcDestination  : String = /Users/david/shakespeare.txt
+  val SrcDestination: String = s"${sys.env("HOME")}/shakespeare.txt"
+
 
   val lines = Source.fromFile(SrcDestination)("UTF-8").getLines
-                                                  //> lines  : Iterator[String] = non-empty iterator
+
 
   def parse(input: Iterator[String], takeCount: Int, filter: ((String, Int)) => Boolean) = {
-    input.flatMap { l => Word.findAllIn(l.toLowerCase()).toSeq }
+    input
+      .flatMap { l => Word.findAllIn(l.toLowerCase()).toSeq }
       .toSeq
       .groupBy(identity)
       .values
@@ -34,12 +35,12 @@ object quizTime {
       .filter(filter)
       .toSeq.sortBy(-_._2)
       .take(takeCount)
-  }                                               //> parse: (input: Iterator[String], takeCount: Int, filter: ((String, Int)) =>
-                                                  //|  Boolean)Seq[(String, Int)]
+  }
 
-  val func = { t:(_,Int) => t._2 > 2 }            //> func  : (Tuple2[_, Int]) => Boolean = <function1>
 
-  parse(lines, 100, func )
+  val func = { t:(_,Int) => t._2 > 2 }
+
+  parse(lines, 30, func )
     .foreach {
       case (word, count) => println(f"${word}%15s : ${Fmt.format(count)}%7s")
     }                                             //>             the :  27,826

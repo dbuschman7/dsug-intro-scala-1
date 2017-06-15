@@ -1,5 +1,4 @@
 // mixins  - from Martin Odersky - The Simple Parts - San Fransisco Scala  Users Group 2014
-object full_mixins {
   println("Welcome to the Scala Full Mixins")     //> Welcome to the Scala Full Mixins
 
   trait Graphs {
@@ -46,36 +45,31 @@ object full_mixins {
   // ////////////////////////////////////
   class MyKidsGraph extends AbstractModel with ConcreteModel
 
-  val e = Person("emily", 19)                     //> e  : full_mixins.Person = Person(emily,19)
-  val k = Person("katelyn", 17)                   //> k  : full_mixins.Person = Person(katelyn,17)
-  val j = Person("joshua", 14)                    //> j  : full_mixins.Person = Person(joshua,14)
+  val e = Person("emily", 19)
+  val k = Person("katelyn", 17)
+  val j = Person("joshua", 14)
 
   val g = new MyKidsGraph().newGraph(Set(e, k, j), Set((e, k), (k, j)))
-                                                  //> g  : full_mixins.MyKidsGraph#Graph = full_mixins$$anonfun$main$1$AbstractMo
-                                                  //| del$1$Graph@5056dfcb
 
-  g.nodes                                         //> res0: scala.collection.immutable.Set[full_mixins.Person] = Set(Person(emily
-                                                  //| ,19), Person(katelyn,17), Person(joshua,14))
-  g.edges                                         //> res1: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set((Person(emily,19),Person(katelyn,17)), (Person(katelyn,17),Person
-                                                  //| (joshua,14)))
 
-  g.sources                                       //> res2: scala.collection.immutable.Set[full_mixins.Person] = Set(Person(emily
-                                                  //| ,19))
-  g.outgoing(e)                                   //> res3: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set((Person(emily,19),Person(katelyn,17)))
-  g.outgoing(k)                                   //> res4: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set((Person(katelyn,17),Person(joshua,14)))
-  g.outgoing(j)                                   //> res5: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set()
+  g.nodes
 
-  g.incoming(e)                                   //> res6: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set()
-  g.incoming(k)                                   //> res7: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set((Person(emily,19),Person(katelyn,17)))
-  g.incoming(j)                                   //> res8: scala.collection.immutable.Set[(full_mixins.Person, full_mixins.Perso
-                                                  //| n)] = Set((Person(katelyn,17),Person(joshua,14)))
-}
+  g.edges
+
+  g.sources
+
+  g.outgoing(e)
+
+  g.outgoing(k)
+
+  g.outgoing(j)
+
+  g.incoming(e)
+
+  g.incoming(k)
+
+  g.incoming(j)
+
 
 //
 //
